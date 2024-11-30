@@ -1,0 +1,17 @@
+services:
+  redis-service:
+    image: redis:7.4.1
+    ports:
+      - 6377:6379
+    volumes:
+      - travlr_redis:/data
+    networks:
+      - travlr_network
+    command: ['redis-server']
+
+volumes:
+  travlr_redis:
+
+networks:
+  travlr_network:
+    driver: bridge

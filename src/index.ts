@@ -2,6 +2,7 @@ import express from 'express';
 import { rateLimit } from 'express-rate-limit';
 import http from 'http';
 import routes from '@/routes/routes';
+import { initRedis } from './db/redis';
 
 const app = express();
 const server = http.createServer(app);
@@ -13,6 +14,7 @@ const limiter = rateLimit({
   legacyHeaders: false // Disable the `X-RateLimit-*` headers.
 });
 
+initRedis();
 app.use(limiter);
 app.use(express.json());
 app.use(routes);
