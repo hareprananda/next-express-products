@@ -6,8 +6,6 @@ const redisPort = process.env.REDIS_PORT || 6377;
 export let redis: Redis;
 
 export const initRedis = () => {
-  console.log('redis host is', redisHost)
-  console.log('redis port is', redisPort)
   redis = new Redis({
     host: redisHost,
     port: redisPort as unknown as number

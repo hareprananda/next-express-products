@@ -4,11 +4,11 @@ import http from 'http';
 import routes from '@/routes/routes';
 import { initRedis } from './db/redis';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
-const server = http.createServer(app);
 
 const limiter = rateLimit({
   windowMs: 2 * 60 * 1000, // 15 minutes
@@ -18,9 +18,12 @@ const limiter = rateLimit({
 });
 
 initRedis();
+app.use(cors());
 app.use(limiter);
 app.use(express.json());
 app.use(routes);
+
+const server = http.createServer(app);
 
 const PORT = process.env.PORT || 8080;
 
