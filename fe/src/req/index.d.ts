@@ -8,7 +8,7 @@ type SuccessResponse<T> = {
 export type ErrorResponse = {
   statusCode: number;
   data: undefined;
-  message: string[];
+  message: string;
   error: true;
 };
 

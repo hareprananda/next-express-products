@@ -12,9 +12,11 @@ const config: Config = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     // ...
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^antd/es/(.*)$': '<rootDir>/node_modules/antd/lib/$1'
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testMatch: ['**/__tests__/**/*.test.tsx']
 
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

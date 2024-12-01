@@ -27,23 +27,18 @@ const apiCall = <T>({ withToken = true, ...props }: Props) => {
     ...props
   })
     .then((res) => {
+      res.data['error'] = false;
       return res.data;
     })
-    .catch((err: AxiosError) => {
+    .catch((err: AxiosError<{ statusCode: number; message: string; status: 'error' }>) => {
       if (err.response?.status === 401) {
         LocalStorage.delete('user');
         redirect('/auth/login');
-        // return {
-        //   error: true,
-        //   message: ['Session Expired'],
-        //   statusCode: 401,
-        //   data: undefined
-        // } as ErrorResponse;
       }
       return {
         error: true,
-        message: ((err.response?.data as any).message as any) || [err.message],
-        statusCode: 500,
+        message: ((err.response?.data as any).message as any) || err.message,
+        statusCode: err.response?.data.statusCode,
         data: undefined
       } as ErrorResponse;
     });
