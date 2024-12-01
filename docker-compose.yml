@@ -1,4 +1,16 @@
 services:
+  app_be:
+    build:
+      context: .
+      dockerfile: ./be/Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - travlr_network
+    environment:
+      REDIS_HOST: "${REDIS_HOST}"
+      REDIS_PORT: "${REDIS_PORT}"
+      JWT_SECRET: "${JWT_SECRET}"
   redis-service:
     image: redis:7.4.1
     ports:
@@ -7,7 +19,7 @@ services:
       - travlr_redis:/data
     networks:
       - travlr_network
-    command: ['redis-server']
+    command: ["redis-server"]
 
 volumes:
   travlr_redis:
