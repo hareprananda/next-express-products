@@ -52,22 +52,26 @@ class BaseModel<T extends Model> {
     return result > 0;
   }
 
-  async pagination(page: number, limit: number): Promise<PaginationRes<T>> {
-    const allDataEntries = Object.entries(await redis.hgetall(this.key));
-    const datas = allDataEntries.slice(page * limit, (page + 1) * limit);
-    const result = datas.map(([id, data]) => ({
-      id,
-      ...JSON.parse(data)
-    }));
+  async pagination(page: number, limit: number): Promise<PaginationRes<T> | null> {
+    try {
+      const allDataEntries = Object.entries(await redis.hgetall(this.key));
+      const datas = allDataEntries.slice((page - 1) * limit, page * limit);
+      const result = datas.map(([id, data]) => ({
+        id,
+        ...JSON.parse(data)
+      }));
 
-    return {
-      data: result,
-      metadata: {
-        count: allDataEntries.length,
-        limit,
-        page
-      }
-    };
+      return {
+        data: result,
+        metadata: {
+          count: allDataEntries.length,
+          limit,
+          page
+        }
+      };
+    } catch {
+      return null;
+    }
   }
 }
 

@@ -8,7 +8,7 @@ class AuthService {
   createToken = (tokenContent: User) => {
     const secretKey = process.env.JWT_SECRET;
     const payload = { username: tokenContent.id, email: tokenContent.email };
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h', algorithm: 'RS256' });
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h', algorithm: 'HS256' });
     return token;
   };
 
@@ -26,7 +26,7 @@ class AuthService {
       delete payload.password;
       return serviceRes(payload, 200);
     } else {
-      return serviceRes('Failed to create user', 400);
+      return serviceRes('Username already exist', 400);
     }
   };
 

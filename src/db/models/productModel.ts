@@ -1,11 +1,12 @@
 import BaseModel from './baseModel';
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   type: 'new' | 'second';
+  year: string;
   price: number;
-  amount: number;
+  stock: number;
 };
 
 class ProductModel extends BaseModel<Product> {
