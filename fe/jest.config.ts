@@ -13,7 +13,8 @@ const config: Config = {
   moduleNameMapper: {
     // ...
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^antd/es/(.*)$': '<rootDir>/node_modules/antd/lib/$1'
+    '^antd/es/(.*)$': '<rootDir>/node_modules/antd/lib/$1',
+    '^next/navigation$': '<rootDir>/jest.setup.ts'
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testMatch: ['**/__tests__/**/*.test.tsx']
