@@ -4,3 +4,7 @@ export const sleep = (ms: number) =>
       res(true);
     }, ms);
   });
+
+export const capitalize = (str: string) => {
+  return str[0].toUpperCase() + str.slice(1);
+};

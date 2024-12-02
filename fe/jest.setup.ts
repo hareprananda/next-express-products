@@ -28,3 +28,11 @@ global.console = {
 export const useRouter = jest.fn();
 export const usePathname = jest.fn();
 export const redirect = jest.fn();
+
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+global.ResizeObserver = ResizeObserver;

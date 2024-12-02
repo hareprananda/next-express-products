@@ -8,10 +8,12 @@ import Password from 'antd/es/input/Password';
 import AuthReq from '@/req/auth/auth';
 import Loading, { LoadingRef } from '@/components/loading/Loading';
 import LocalStorage from '@/helper/localstorage';
+import { useRouter } from 'next/navigation';
 
 const LoginForm: React.FC = () => {
   const [errorText, setErrorText] = useState('');
   const loadingRef = useRef<LoadingRef>(null);
+  const router = useRouter();
   const onFinish = (values: { username: string; password: string }) => {
     loadingRef.current?.show();
     setErrorText('');
@@ -19,6 +21,7 @@ const LoginForm: React.FC = () => {
       loadingRef.current?.dismiss();
       if (!res.error) {
         LocalStorage.set('user', res.data);
+        router.replace('/dashboard');
       } else setErrorText(res.message);
     });
   };

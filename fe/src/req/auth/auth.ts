@@ -14,9 +14,16 @@ class AuthReqClass {
   register = (payload: Model.RegisterPayload) => {
     return apiCall<Model.RegisterRes>({
       method: 'POST',
-      url: '/auth/login',
+      url: '/auth/register',
       data: payload,
       withToken: false
+    });
+  };
+
+  logout = () => {
+    return apiCall({
+      method: 'POST',
+      url: '/auth/logout'
     });
   };
 }
