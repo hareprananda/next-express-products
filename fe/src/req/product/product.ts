@@ -16,6 +16,36 @@ class ProductReqClass {
       params: { page, limit }
     });
   };
+
+  addProduct = (data: Model.ProductPayload) => {
+    return apiCall<Model.Product>({
+      method: 'POST',
+      url: '/products',
+      data
+    });
+  };
+
+  deleteProduct = (id: string) => {
+    return apiCall({
+      method: 'DELETE',
+      url: `/products/${id}`
+    });
+  };
+
+  updateProduct = (id: string, data: Model.ProductPayload) => {
+    return apiCall({
+      method: 'PUT',
+      url: `/products/${id}`,
+      data
+    });
+  };
+
+  productDetail = (id: string) => {
+    return apiCall<Model.Product>({
+      method: 'GET',
+      url: `/products/${id}`
+    });
+  };
 }
 
 const ProductReq = new ProductReqClass();

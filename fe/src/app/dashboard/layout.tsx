@@ -1,25 +1,12 @@
 import React, { PropsWithChildren } from 'react';
-import { UserOutlined, ProductOutlined } from '@ant-design/icons';
-import { Flex, Menu } from 'antd';
+import { Flex } from 'antd';
 import colors from '@/components/theme/colors';
 import { Title } from '@/components/antdchild/Text';
 import LogoutButton from './components/LogoutButton';
 import ToggleButton from './components/ToggleButton';
 import Name from './components/Name';
 import ComponentProvider from '@/components/provider/ComponentProvider';
-
-const items = [
-  {
-    key: 1,
-    icon: React.createElement(UserOutlined),
-    label: 'Home'
-  },
-  {
-    key: 2,
-    icon: React.createElement(ProductOutlined),
-    label: 'Product'
-  }
-];
+import SidebarMenu from './components/SidebarMenu';
 
 const App: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -46,7 +33,7 @@ const App: React.FC<PropsWithChildren> = ({ children }) => {
                 <Name />
               </div>
 
-              <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']} items={items} />
+              <SidebarMenu />
             </div>
           </div>
           <div className='flex-auto relative'>

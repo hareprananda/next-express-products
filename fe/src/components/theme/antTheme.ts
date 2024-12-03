@@ -9,13 +9,15 @@ export const antdConfig: ThemeConfig = {
     colorTextHeading: colors.text,
     colorIcon: colors.text,
     colorBgElevated: '#111d2c',
-    colorLink: '#8dcff8'
+    colorLink: '#8dcff8',
+    colorTextPlaceholder: '#bbbbbb'
   },
   components: {
     Button: {
       boxShadow: 'none',
       defaultShadow: 'none',
       primaryShadow: 'none',
+      dangerShadow: 'none',
       boxShadowSecondary: 'none',
       boxShadowTertiary: 'none'
     },

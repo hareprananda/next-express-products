@@ -1,7 +1,6 @@
 import config from '@/config';
 import axios, { AxiosError } from 'axios';
 import { ErrorResponse, Response } from './index.d';
-import LocalStorage from '@/helper/localstorage';
 import Cookies from 'js-cookie';
 
 interface Props {
@@ -33,10 +32,8 @@ const apiCall = <T>({ withToken = true, ...props }: Props) => {
     })
     .catch((err: AxiosError<{ statusCode: number; message: string; status: 'error' }>) => {
       if (err.response?.status === 401) {
-        if (typeof window !== 'undefined') {
-          LocalStorage.delete('user');
-          window?.location.replace('/auth/login');
-        }
+        Cookies.remove('session');
+        window?.location.replace('/auth/login');
       }
       return {
         error: true,
