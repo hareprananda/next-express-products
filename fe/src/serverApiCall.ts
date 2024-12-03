@@ -1,4 +1,3 @@
-import config from '@/config';
 import axios, { AxiosError } from 'axios';
 import { ErrorResponse, Response } from './req/index.d';
 import LocalStorage from '@/helper/localstorage';
@@ -22,7 +21,7 @@ const serverApiCall = <T>({ withToken = true, ...props }: Props) => {
   }
 
   return axios<Response<T>>({
-    baseURL: config.API,
+    baseURL: `http://${process.env.BE_SERVICE_PORT || 'localhost:8080'}`,
     headers,
     ...props
   })

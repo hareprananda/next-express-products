@@ -12,7 +12,7 @@ const App: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Flex vertical className='min-h-screen'>
-        <Flex justify='space-between' align='center' className='w-full h-14 bg-slate-700 top-0 sticky px-4'>
+        <Flex justify='space-between' align='center' className='z-20 w-full h-14 bg-slate-700 top-0 sticky px-4'>
           <Flex align='center' gap={'10px'}>
             <ToggleButton />
             <Title className='!m-0' level={3}>

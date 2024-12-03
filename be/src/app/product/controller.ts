@@ -2,6 +2,7 @@ import { addProductPayloadSchema, infographicProductSchema, paginationSchema, up
 import { Request, Response } from 'express';
 import ProductService from './service';
 import { httpRes } from '@/utils/utils';
+import { Product } from '@/db/models/productModel';
 
 class ProductController {
   addProduct = async (req: Request, res: Response) => {
@@ -12,7 +13,13 @@ class ProductController {
           message: err.message
         };
       });
-      const { data, statusCode } = await ProductService.addProductService(req.body);
+      const payload = req.body as Omit<Product, 'id'>;
+
+      if (typeof payload.price === 'string') payload.price = parseInt(payload.price);
+      if (typeof payload.stock === 'string') payload.stock = parseInt(payload.stock);
+      if (typeof payload.year === 'number') payload.year = (payload.year as unknown as number).toString();
+
+      const { data, statusCode } = await ProductService.addProductService(payload);
 
       httpRes(res, statusCode, data);
     } catch (err) {
@@ -40,7 +47,11 @@ class ProductController {
         };
       });
       const id = req.params.id;
-      const { data, statusCode } = await ProductService.updateProductService(id, req.body);
+      const payload = req.body;
+      if (typeof payload?.price === 'string') payload.price = parseInt(payload.price);
+      if (typeof payload?.stock === 'string') payload.stock = parseInt(payload.stock);
+      if (typeof payload?.year === 'number') payload.year = (payload.year as unknown as number).toString();
+      const { data, statusCode } = await ProductService.updateProductService(id, payload);
 
       httpRes(res, statusCode, data);
     } catch (err) {

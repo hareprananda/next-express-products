@@ -23,6 +23,7 @@ services:
       - travlr_network
     environment:
       API_URL: "${API_URL}"
+      BE_SERVICE_PORT: "app_be:8080"
 
   redis-service:
     image: redis:7.4.1
