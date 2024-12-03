@@ -36,3 +36,18 @@ class ResizeObserver {
 }
 
 global.ResizeObserver = ResizeObserver;
+
+jest.mock('antd', () => {
+  const React = require('react');
+  const originalAntd = jest.requireActual('antd');
+  return {
+    // @ts-ignore
+    ...originalAntd,
+    Select: ({ onChange, value }: { onChange: (value: string) => void; value: string }) =>
+      React.createElement('input', {
+        'data-testid': 'type-select',
+        value,
+        onChange: (e: any) => onChange(e.target.value)
+      })
+  };
+});

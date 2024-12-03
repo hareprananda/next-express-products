@@ -1,13 +1,13 @@
 import React from 'react';
-import ProductForm from '../components/Form';
+import ProductForm from '@/app/dashboard/products/components/Form';
 import { Flex } from 'antd';
 
-const page = () => {
+const Page = () => {
   return (
-    <Flex justify='center'>
+    <Flex justify='center' data-testid='flexx'>
       <ProductForm type='add' />
     </Flex>
   );
 };
 
-export default page;
+export default Page;

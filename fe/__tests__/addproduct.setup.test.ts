@@ -5,16 +5,22 @@ import { setupServer } from 'msw/node';
 import TestHelper from './utils/helper';
 
 const server = setupServer(
-  rest.post(`${config.API}/auth/login`, async (req, res, ctx) => {
+  rest.post(`${config.API}/products`, async (req, res, ctx) => {
     await sleep(100);
     // const body = await req.json();
     return res(
       ctx.status(200),
       ctx.json(
         TestHelper.successRes({
-          id: '123',
-          email: 'asdfadsf@sdfd',
-          token: 'xxx'
+          id: '640451733238226290',
+          name: 'AAA',
+          price: {
+            amount: 10000,
+            formattedAmount: '$10,000'
+          },
+          type: 'second',
+          stock: 45,
+          year: '2020'
         })
       )
     );

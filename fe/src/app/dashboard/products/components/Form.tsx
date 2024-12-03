@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Card, InputNumber, Select } from 'antd';
-import { Text, Title } from '@/components/antdchild/Text';
+import { Title } from '@/components/antdchild/Text';
 import { Button, Flex, Form, Input } from 'antd';
 import { Item } from '@/components/antdchild/Form';
 import { capitalize } from '@/helper/utils';
@@ -111,6 +111,7 @@ const Page: React.FC<Props> = ({ type, params }) => {
             <Title level={5}>Type</Title>
             <Item name='type' rules={[{ required: true, message: 'Please input product name' }]}>
               <Select
+                data-testid='type-select'
                 placeholder='Select product type'
                 options={[
                   { value: 'second', label: <span>Second</span> },
@@ -141,7 +142,7 @@ const Page: React.FC<Props> = ({ type, params }) => {
 
             <Flex justify='flex-end' gap={10}>
               {!!id && (
-                <Button color='danger' variant='outlined' onClick={deleteData}>
+                <Button color='danger' variant='outlined' onClick={deleteData} data-testid='delete-btn'>
                   Delete
                 </Button>
               )}

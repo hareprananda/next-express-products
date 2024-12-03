@@ -79,13 +79,16 @@ const ProductList: React.FC = () => {
       <Card title='Product Data' extra={<Link href={'/dashboard/products/add'}>Add Product</Link>} bordered={false}>
         <LocalLoading showLoading={loading} data-testid='productList-loading' />
         <Table<ProductType>
+          data-testid='data-container'
           pagination={{
             position: ['none', 'bottomCenter'],
             pageSize: pageSize,
             total: totalData,
             onChange(page) {
               reqProduct(page);
-            }
+            },
+            // @ts-ignore
+            'data-testid': 'product-pagination'
           }}
           columns={newColumns}
           dataSource={data}

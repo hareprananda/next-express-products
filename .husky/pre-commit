@@ -1,1 +1,1 @@
-cd fe && npm run lint
+cd fe && npm run lint && npm run test
