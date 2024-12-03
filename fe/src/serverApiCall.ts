@@ -1,8 +1,8 @@
 import config from '@/config';
 import axios, { AxiosError } from 'axios';
-import { ErrorResponse, Response } from './index.d';
+import { ErrorResponse, Response } from './req/index.d';
 import LocalStorage from '@/helper/localstorage';
-import Cookies from 'js-cookie';
+import { getSession } from '@/lib';
 
 interface Props {
   url: string;
@@ -12,14 +12,13 @@ interface Props {
   withToken?: boolean;
 }
 
-const apiCall = <T>({ withToken = true, ...props }: Props) => {
+const serverApiCall = <T>({ withToken = true, ...props }: Props) => {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json'
   };
 
   if (withToken && typeof window !== 'undefined') {
-    const token = JSON.parse(Cookies.get('session') || '{}')['token'] || '';
-    headers['Authorization'] = 'Bearer ' + token;
+    headers['Authorization'] = 'Bearer ' + (getSession()?.token || '');
   }
 
   return axios<Response<T>>({
@@ -47,4 +46,4 @@ const apiCall = <T>({ withToken = true, ...props }: Props) => {
     });
 };
 
-export default apiCall;
+export default serverApiCall;

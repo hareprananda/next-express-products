@@ -10,7 +10,7 @@ import AuthReq from '@/req/auth/auth';
 import { RegisterPayload } from '@/req/auth/authmodel';
 import { useRouter } from 'next/navigation';
 
-const LoginForm: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const loadingRef = useRef<LoadingRef>(null);
   const router = useRouter();
   const [errorText, setErrorText] = useState('');
@@ -39,16 +39,7 @@ const LoginForm: React.FC = () => {
           You&apos;re successfully registered, please login using the registered credential to enter the system
         </Text>
       </Modal>
-      <Form
-        onFinish={onFinish}
-        // name='basic'
-        // labelCol={{ span: 8 }}
-        // wrapperCol={{ span: 16 }}
-        // style={{ maxWidth: 600 }}
-        // initialValues={{ remember: true }}
-        // onFinishFailed={onFinishFailed}
-        // autoComplete='off'
-      >
+      <Form onFinish={onFinish}>
         <Title level={5}>Username</Title>
         <Item name='username' rules={[{ required: true, message: 'Please input your username!' }]}>
           <Input data-testid='username-input' />
@@ -93,4 +84,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
