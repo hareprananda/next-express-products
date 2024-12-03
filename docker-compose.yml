@@ -12,6 +12,18 @@ services:
       REDIS_PORT: 6379
       JWT_SECRET: "${JWT_SECRET}"
       REDIS_PASSWORD: "${REDIS_PASSWORD}"
+
+  app_fe:
+    build:
+      context: .
+      dockerfile: ./fe/Dockerfile
+    ports:
+      - 3001:3000
+    networks:
+      - travlr_network
+    environment:
+      API_URL: "${API_URL}"
+
   redis-service:
     image: redis:7.4.1
     ports:
@@ -21,7 +33,7 @@ services:
     networks:
       - travlr_network
     environment:
-      - REDIS_PASSWORD= "${REDIS_PASSWORD}"
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
     command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
 
 volumes:
