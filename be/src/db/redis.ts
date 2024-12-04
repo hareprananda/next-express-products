@@ -1,4 +1,7 @@
 import Redis from 'ioredis';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const redisHost = process.env.REDIS_HOST || 'localhost';
 const redisPort = process.env.REDIS_PORT || 6377;

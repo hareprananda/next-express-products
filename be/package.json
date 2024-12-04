@@ -5,7 +5,7 @@
   "author": "hareprananda <hareprananda9@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "cp ../.env .env && nodemon",
     "start": "node -r ./pathconfig.prod dist/src/index.js",
     "prebuild": "rimraf dist/",
     "build": "tsc",
